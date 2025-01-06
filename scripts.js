@@ -9,13 +9,24 @@ window.addEventListener('load', function() {
 	
 	
 	// game logic
+	class Player {
+		constructor(game) {
+			this.game = game;
+		}
+	}
 	
 	class Game {
 		constructor(canvas){
 			this.canvas = canvas;
 			this.width = this.canvas.width;
+			this.height = this.canvas.height;
+
+			// create player on load
+			this.player = new Player(this)
 		}
 	}
+
+	const game = new Game(canvas);
 	
 	// draw & update 
 	function animate() {}
