@@ -6,7 +6,7 @@ window.addEventListener('load', function() {
 	
 	// access the canvas properties
 	const type_2d = canvas.getContext("2d");
-	
+	type_2d.fillStyle = '#FEFEFE';
 	
 	// game logic
 	class Player {
@@ -14,12 +14,20 @@ window.addEventListener('load', function() {
 		constructor(game) {
 			// * which is then converted into a class property
 			this.game = game;
+
+			// generate player in the middle
+			this.collisionX = this.game.width * 0.5;
+			this.collisionY = this.game.height * 0.5;
+			this.collisionRad = 35;
+
 		}
 			// draw player method
 			draw(context){
 				context.beginPath();
 				// 5 args: x, y, r, rad, end-rad
-				context.arc(100, 100, 50, 0, Math.PI * 2);
+				context.arc(this.collisionX, this.collisionY, this.collisionRad, 0, Math.PI * 2);
+				/* To limit canvas settings to only specific draw calls, wrap drawing code between save() & restore methods */
+				context.globalAlpha = 0.5;
 				context.fill();
 				
 
