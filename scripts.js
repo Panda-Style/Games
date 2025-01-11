@@ -34,6 +34,12 @@ window.addEventListener('load', function() {
 				
 
 			}
+
+			// set up update method to add player to current mouse position
+			update(){
+				this.collisionX = this.game.mouse.x;
+				this.collisionY = this.game.mouse.y;
+			}
 		
 	}
 	
@@ -78,16 +84,29 @@ window.addEventListener('load', function() {
 
 		
 
-		// access draw method
+		// render the game canvas & update player location
 		render(context){
+			// access draw method 
 			this.player.draw(context)
-			
+			this.player.update();
 		}
 	}
 
 	const game = new Game(canvas);
 	game.render(type_2d);
 	console.log(game);
+
 	// draw & update 
-	function animate() {}
+	function animate() {
+
+		// clearRect to stop trailing graphic of player instance
+		type_2d.clearRect(0, 0, canvas.width, canvas.height);
+		game.render(type_2d);
+
+		//animation loop
+		requestAnimationFrame(animate);
+	}
+
+	animate();
+
 });
